@@ -7,13 +7,13 @@ app.get("/app/qudratov_com26_gmail_com", (req, res) => {
   const rawY = req.query.y;
 
   if (!/^\d+$/.test(rawX) || !/^\d+$/.test(rawY)) {
-    return res.type("text/plain").send("NaN");
+    return res.send("NaN");
   }
 
   const x = Number(rawX);
   const y = Number(rawY);
 
-  res.type("text/plain").send(lcm(x, y));
+  res.send(lcm(x, y));
 });
 
 function lcm(x, y) {
