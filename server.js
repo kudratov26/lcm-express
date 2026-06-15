@@ -23,7 +23,7 @@ app.get("/app/qudratov_com26_gmail_com", (req, res) => {
 function lcm(x, y) {
   const bx = BigInt(x);
   const by = BigInt(y);
-  return Number(bx * by / gcd(bx, by));
+  return String(bx * by / gcd(bx, by));
 }
 
 function gcd(x, y) {
