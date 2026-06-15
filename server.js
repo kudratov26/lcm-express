@@ -5,25 +5,23 @@ const port = process.env.PORT || 3000;
 app.get("/app/qudratov_com26_gmail_com", (req, res) => {
   const rawX = req.query.x;
   const rawY = req.query.y;
-
-  if (!Number.isInteger(Number(rawX)) || !Number.isInteger(Number(rawY)) || !rawX || !rawY || Number(rawX) < 0 || Number(rawY) < 0){
+    
+  if (!/^\d+$/.test(rawX) || !/^\d+$/.test(rawY)) {
     return res.type("text/plain").send("NaN");
   }
 
-  if (Number(rawX) === 0 && Number(rawY) === 0) {
-    return res.type("text/plain").send("0");
-  }
+  const x = BigInt(rawX);
+  const y = BigInt(rawY);
 
-  const x = Number(rawX);
-  const y = Number(rawY);
+  if (x <= 0n || y <= 0n) {
+    return res.type("text/plain").send("NaN");
+  }
 
   res.type("text/plain").send(lcm(x, y));
 });
 
 function lcm(x, y) {
-  const bx = BigInt(x);
-  const by = BigInt(y);
-  return String(bx * by / gcd(bx, by));
+  return String(x * y / gcd(x, y));
 }
 
 function gcd(x, y) {
